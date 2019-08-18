@@ -1,0 +1,51 @@
+package ${cfg.voPackage}.vo;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import ${package.Entity}.${entity};
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+#end
+
+import java.io.Serializable;
+
+/**
+ * @author ${author}
+ * @date ${date}
+ * @jdk.version 1.8
+ * @desc ${table.comment}vo
+ */
+#if(${swagger2})
+@ApiModel(value = "${table.comment}vo" ,description = "${cfg.introduce}")
+#end
+#if(${entityLombokModel})
+@Data
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
+@Accessors(chain = true)
+#end
+public class ${entity}Vo extends ${entity} implements Serializable {
+## ----------  BEGIN 字段循环遍历  ----------
+#foreach($field in ${cfg.voLists})
+
+#if("$!field.comment" != "")
+    #if(${swagger2})
+    @ApiModelProperty(value = "${field.comment}")
+    #else
+    /**
+     * ${field.comment}
+     */
+    #end
+#end
+    private ${field.propertyType} ${field.propertyName};
+#end
+## ----------  END 字段循环遍历  ----------
+
+}
