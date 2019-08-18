@@ -1,4 +1,4 @@
-mybatis-plus最好的代码生成封装
+mybatis-plus最好的代码生成封装 包含了代码自动生成 简单测试接口
 
 ```java
 /**
